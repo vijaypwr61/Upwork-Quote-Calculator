@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upwork Project Quote Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .calculator {
+            flex: 1 1 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #191919;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 850px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .calculator {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Upwork Project Quote Calculator for Indian Freelancer</h3>
+    </div>
+    <div class="container">
+        <!-- Quote Calculator -->
+        <div class="calculator">
+            <h2>Quote Calculator</h2>
+
+            <label for="desiredAmount">Desired Amount to Receive ($):</label>
+            <input type="number" id="desiredAmount" placeholder="Enter desired amount" value="00.00"
+                oninput="calculateQuote()" />
+
+            <label for="upworkFee1">Upwork Fee (%):</label>
+            <input type="number" id="upworkFee1" placeholder="Enter Upwork fee percentage" value="10"
+                oninput="calculateQuote()" />
+
+            <label for="salesTax1">Indian Sale Tax (%):</label>
+            <input type="number" id="salesTax1" placeholder="Enter Indian sale tax percentage" value="1"
+                oninput="calculateQuote()" />
+
+            <label for="gst1">GST on Upwork Fee (%):</label>
+            <input type="number" id="gst1" placeholder="Enter GST percentage" value="18" oninput="calculateQuote()" />
+
+            <div class="result" id="resultQuote"></div>
+        </div>
+
+        <!-- Net Calculator -->
+        <div class="calculator">
+            <h2>Net Calculator</h2>
+
+            <label for="clientAmount">Client Pays ($):</label>
+            <input type="number" id="clientAmount" placeholder="Enter client payment" value="00.00"
+                oninput="calculateNet()" />
+
+            <label for="upworkFee2">Upwork Fee (%):</label>
+            <input type="number" id="upworkFee2" placeholder="Enter Upwork fee percentage" value="10"
+                oninput="calculateNet()" />
+
+            <label for="salesTax2">Indian Sale Tax (%):</label>
+            <input type="number" id="salesTax2" placeholder="Enter Indian sale tax percentage" value="1"
+                oninput="calculateNet()" />
+
+            <label for="gst2">GST on Upwork Fee (%):</label>
+            <input type="number" id="gst2" placeholder="Enter GST percentage" value="18" oninput="calculateNet()" />
+
+            <div class="result" id="resultNet"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quote Calculator Function
+        function calculateQuote() {
+            // Get input values
+            let desiredAmount = parseFloat(document.getElementById('desiredAmount').value);
+            let upworkFeePercent = parseFloat(document.getElementById('upworkFee1').value);
+            let salesTaxPercent = parseFloat(document.getElementById('salesTax1').value);
+            let gstPercent = parseFloat(document.getElementById('gst1').value);
+
+            // Validate inputs
+            if (isNaN(desiredAmount) || desiredAmount <= 0) desiredAmount = 0;
+            if (isNaN(upworkFeePercent)) upworkFeePercent = 0;
+            if (isNaN(salesTaxPercent)) salesTaxPercent = 0;
+            if (isNaN(gstPercent)) gstPercent = 0;
+
+            // Calculate total percent deductions
+            let totalPercent = (upworkFeePercent / 100) + (salesTaxPercent / 100) + ((upworkFeePercent * gstPercent) / 10000);
+            let baseAmount = desiredAmount / (1 - totalPercent);
+
+            // Calculate fees based on baseAmount
+            let upworkFee = (upworkFeePercent / 100) * baseAmount;
+            let salesTax = (salesTaxPercent / 100) * baseAmount;
+            let gstOnFee = (gstPercent / 100) * upworkFee;
+
+            // Total charges
+            let totalCharges = upworkFee + salesTax + gstOnFee;
+
+            // Total amount to quote
+            let totalAmountToQuote = baseAmount;
+
+            // Display result
+            document.getElementById('resultQuote').innerHTML = `
+                <p><strong>Upwork Fee:</strong> $${upworkFee.toFixed(2)}</p>
+                <p><strong>Indian Sale Tax:</strong> $${salesTax.toFixed(2)}</p>
+                <p><strong>GST on Upwork Fee:</strong> $${gstOnFee.toFixed(2)}</p>
+                <p><strong>Total Charges:</strong> $${totalCharges.toFixed(2)}</p>
+                <p><strong>Total Amount Client Should Pay:</strong> $${totalAmountToQuote.toFixed(2)}</p>
+            `;
+        }
+
+        // Net Calculator Function
+        function calculateNet() {
+            // Get input values
+            let clientAmount = parseFloat(document.getElementById('clientAmount').value);
+            let upworkFeePercent = parseFloat(document.getElementById('upworkFee2').value);
+            let salesTaxPercent = parseFloat(document.getElementById('salesTax2').value);
+            let gstPercent = parseFloat(document.getElementById('gst2').value);
+
+            // Validate inputs
+            if (isNaN(clientAmount) || clientAmount <= 0) clientAmount = 0;
+            if (isNaN(upworkFeePercent)) upworkFeePercent = 0;
+            if (isNaN(salesTaxPercent)) salesTaxPercent = 0;
+            if (isNaN(gstPercent)) gstPercent = 0;
+
+            // Calculate fees
+            let upworkFee = (upworkFeePercent / 100) * clientAmount;
+            let salesTax = (salesTaxPercent / 100) * clientAmount;
+            let gstOnFee = (gstPercent / 100) * upworkFee;
+
+            // Total deductions
+            let totalDeductions = upworkFee + salesTax + gstOnFee;
+
+            // Net amount received
+            let netAmount = clientAmount - totalDeductions;
+
+            // Display result
+            document.getElementById('resultNet').innerHTML = `
+                <p><strong>Upwork Fee:</strong> $${upworkFee.toFixed(2)}</p>
+                <p><strong>Indian Sale Tax:</strong> $${salesTax.toFixed(2)}</p>
+                <p><strong>GST on Upwork Fee:</strong> $${gstOnFee.toFixed(2)}</p>
+                <p><strong>Total Deductions:</strong> $${totalDeductions.toFixed(2)}</p>
+                <p><strong>Net Amount Received:</strong> $${netAmount.toFixed(2)}</p>
+            `;
+        }
+
+        // Initial calculations on page load
+        calculateQuote();
+        calculateNet();
+    </script>
+
+</body>
+
+</html>
