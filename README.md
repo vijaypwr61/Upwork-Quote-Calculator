@@ -79,8 +79,8 @@ This project is licensed under the MIT License. See `LICENSE` for more details.
 ## Author
 
 **Vijay Pawar**
-- Email: vijay.pawar@example.com
-- GitHub: [vijaypawar-in](https://github.com/vijaypawar-in)
+- Email: vijaypwr61@gmail.com
+- GitHub: [vijaypawar-in](https://github.com/vijaypwr61)
 
 ---
 
