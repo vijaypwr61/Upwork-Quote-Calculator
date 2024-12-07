@@ -26,7 +26,7 @@ The application is tailored to consider:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/vijaypawar-in/freelancer-fee-calculator.git
+   git clone https://github.com/vijaypwr61/Upwork-Quote-Calculator.git
    ```
 
 2. Open `index.html` in any web browser.
