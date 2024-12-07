@@ -80,7 +80,7 @@ This project is licensed under the MIT License. See `LICENSE` for more details.
 
 **Vijay Pawar**
 - Email: vijaypwr61@gmail.com
-- GitHub: [vijaypawar-in](https://github.com/vijaypwr61)
+- GitHub: [Vijay Pawar](https://github.com/vijaypwr61)
 
 ---
 
