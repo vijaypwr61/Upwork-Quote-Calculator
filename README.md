@@ -79,7 +79,7 @@ This project is licensed under the MIT License. See `LICENSE` for more details.
 ## Author
 
 **Vijay Pawar**
-- Email: vijaypwr61@gmail.com
+- Upwork: [Freelance Profile](https://www.upwork.com/fl/vijaypwr61?mp_source=share)
 - GitHub: [Vijay Pawar](https://github.com/vijaypwr61)
 
 ---
