@@ -38,10 +38,8 @@ The application is tailored to consider:
 ## Folder Structure
 
 ```
-freelancer-fee-calculator/
+upwork-quote-calculator/
 |-- index.html       # Main HTML file
-|-- style.css        # Contains the styles for the calculator
-|-- script.js        # JavaScript functionality
 |-- README.md        # Project documentation
 ```
 
